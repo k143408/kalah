@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.backbase.assignment</groupId>
+  <artifactId>kalah</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <modules>
+    <module>common</module>
+    <module>service</module>
+  </modules>
+
+  <packaging>pom</packaging>
+
+  <name>kalah</name>
+
+  <description>Assignment project for Backbase.</description>
+
+  <distributionManagement>
+    <site>
+      <id>author</id>
+      <url>Jibran Tariq</url>
+    </site>
+  </distributionManagement>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.4.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <lombok.version>1.18.2</lombok.version>
+    <start-class>com.backbase.assignment.kalah.KalahApplication</start-class>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <reportOutputDirectory>${project.basedir}</reportOutputDirectory>
+          <destDir>../javadocs/${project.artifactId}</destDir>
+
+          <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+
+          <!-- <docletPath>/path/to/UmlGraph.jar</docletPath> -->
+          <docletArtifact>
+            <groupId>org.umlgraph</groupId>
+            <artifactId>umlgraph</artifactId>
+            <version>5.6</version>
+          </docletArtifact>
+          <additionalparam>-all -constructors</additionalparam>
+          <useStandardDocletOptions>false</useStandardDocletOptions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.0</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+        <configuration>
+          <!-- Excluding Pojo Classes  -->
+          <excludes>
+            <exclude>**/com/backbase/assignment/kalah/common/domain/**</exclude>
+            <exclude>**/com/backbase/assignment/kalah/common/dto/*</exclude>
+            <exclude>**/com/backbase/assignment/kalah/common/exception/*</exclude>
+            <exclude>**/com/backbase/assignment/kalah/common/util/*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
